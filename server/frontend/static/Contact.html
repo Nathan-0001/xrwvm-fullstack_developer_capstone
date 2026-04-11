@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="contact.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/static/bootstrap.min.css">
-    <title>Contact Us - Best Motors</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="contact.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <title>Contact Us - Best Motors</title>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
-        <div class="container-fluid">
-        <h2 style="padding-right: 5%;">Dealerships</h2>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" style="font-size: larger;"  href="/contact">Contact Us</a>
-            </li>
-            </ul>
-        </div>
-        </div>
-    </nav>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+    <div class="container-fluid">
+      <h2 style="padding-right: 5%;">Dealerships</h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" style="font-size: larger;" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
 
   <!-- Main content -->
   <div class="content">
- 
+
     <!-- Left: contact info -->
     <div class="info-col">
       <h2 class="section-heading">Our Details</h2>
- 
+
       <div class="info-card">
         <!-- Address -->
         <div class="info-row">
@@ -49,7 +52,7 @@
             <div class="info-value">142 Showroom Way<br>Southampton, SO14 1AB</div>
           </div>
         </div>
- 
+
         <!-- Phone -->
         <div class="info-row">
           <div class="icon-box">
@@ -59,7 +62,7 @@
             <div class="info-value">023 8000 1234</div>
           </div>
         </div>
- 
+
         <!-- Email -->
         <div class="info-row">
           <div class="icon-box">
@@ -70,22 +73,22 @@
           </div>
         </div>
       </div>
- 
+
       <!-- Opening hours -->
       <div class="info-card">
         <div class="info-label" style="margin-bottom: 10px;">Opening Hours</div>
         <div class="hours-grid">
           <span class="day">Mon – Fri</span> <span class="time">9:00 – 18:00</span>
-          <span class="day">Saturday</span>   <span class="time">9:00 – 17:00</span>
-          <span class="day">Sunday</span>     <span class="time">10:00 – 15:00</span>
+          <span class="day">Saturday</span> <span class="time">9:00 – 17:00</span>
+          <span class="day">Sunday</span> <span class="time">10:00 – 15:00</span>
         </div>
       </div>
     </div>
- 
+
     <!-- Right: form -->
     <div class="form-card">
       <h2 class="section-heading">Send a Message</h2>
- 
+
       <div class="form-row">
         <div class="field">
           <label for="first-name">First name</label>
@@ -96,17 +99,17 @@
           <input type="text" id="last-name" placeholder="Smith">
         </div>
       </div>
- 
+
       <div class="field">
         <label for="email">Email address</label>
         <input type="email" id="email" placeholder="john@example.com">
       </div>
- 
+
       <div class="field">
         <label for="phone">Phone number</label>
         <input type="tel" id="phone" placeholder="07700 900000">
       </div>
- 
+
       <div class="field">
         <label for="interest">I'm interested in</label>
         <select id="interest">
@@ -119,28 +122,29 @@
           <option>General enquiry</option>
         </select>
       </div>
- 
+
       <div class="field">
         <label for="message">Message</label>
         <textarea id="message" placeholder="Tell us how we can help..."></textarea>
       </div>
- 
+
       <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">Send Enquiry</button>
       <div class="success-msg" id="success-msg">
         Thanks! We'll be in touch within one business day.
       </div>
     </div>
- 
+
   </div>
-    <script>
-      function handleSubmit() {
-        const btn = document.getElementById('submit-btn');
-        const msg = document.getElementById('success-msg');
-        btn.textContent = 'Sent!';
-        btn.disabled = true;
-        msg.style.display = 'block';
-      }
-    </script>
-   
+  <script>
+    function handleSubmit() {
+      const btn = document.getElementById('submit-btn');
+      const msg = document.getElementById('success-msg');
+      btn.textContent = 'Sent!';
+      btn.disabled = true;
+      msg.style.display = 'block';
+    }
+  </script>
+
 </body>
+
 </html>
