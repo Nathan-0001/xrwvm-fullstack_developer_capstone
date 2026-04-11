@@ -125,3 +125,51 @@ img {
     text-align: center;
     box-shadow: 2px 2px 3px #999;
 }
+
+.navbar-custom {
+    background-color: darkturquoise;
+    height: 1in;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand-custom {
+    padding-right: 5%;
+}
+
+.nav-link-custom {
+    font-size: larger;
+}
+
+.about-main-card {
+    width: 80%;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.about-cards-row {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+.about-card {
+    width: 30%;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-card {
+    width: 50%;
+    margin-top: 50px;
+    align-self: center;
+}
+
+.home-btn {
+    background-color: aqua;
+    margin: 10px;
+}
