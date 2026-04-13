@@ -15,20 +15,20 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 
-
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
 
 # Create your views here.
 
+
 # Create a `login_request` view to handle sign in request
 @csrf_exempt
 def login_user(request):
     # Get username and password from request.POST dictionary
     data = json.loads(request.body)
-    username = data['userName']
-    password = data['password']
+    username = data["userName"]
+    password = data["password"]
     # Try to check if provide credential can be authenticated
     user = authenticate(username=username, password=password)
     data = {"userName": username}
@@ -44,39 +44,50 @@ def login_user(request):
 def logout_user(request):
     """Log out the authenticated user and return a JSON response."""
     logout(request)
-    data = {"userName": ""}
+    data = {"status": "Logged out"}
     return JsonResponse(data)
 
 
 # Create a `registration` view to handle sign up request
 @csrf_exempt
 def registration(request):
+    context = {}
+
+    # Load JSON data from the request body
     data = json.loads(request.body)
-    username = data['userName']
-    password = data['password']
-    first_name = data['firstName']
-    last_name = data['lastName']
-    email = data['email']
+    username = data["userName"]
+    password = data["password"]
+    first_name = data["firstName"]
+    last_name = data["lastName"]
+    email = data["email"]
     username_exist = False
     email_exist = False
     try:
         # Check if user already exists
         User.objects.get(username=username)
         username_exist = True
-    except: 
-        # If not Log this as a new user
+    except:
+        # If not, simply log this is a new user
         logger.debug("{} is new user".format(username))
 
-        # Create new user
-        if not username_exist:
-            # Create user in auth_user table
-            user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
-            login(request, user)
-            data = {"userName": username, "status": "Registered and Authenticated"}
-            return JsonResponse(data)
-        else :
-            data = {"userName": username, "status": "Username already exists"}
-            return JsonResponse(data)
+    # If it is a new user
+    if not username_exist:
+        # Create user in auth_user table
+        user = User.objects.create_user(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            password=password,
+            email=email,
+        )
+        # Login the user and redirect to list page
+        login(request, user)
+        data = {"userName": username, "status": "Authenticated"}
+        return JsonResponse(data)
+    else:
+        data = {"userName": username, "error": "Already Registered"}
+        return JsonResponse(data)
+
 
 # # Update the `get_dealerships` view to render the index page with
 # a list of dealerships

@@ -11,12 +11,11 @@ const Header = () => {
     });
   
     const json = await res.json();
-    if (json) {
+    if (json.status === "Logged out") {
       let username = sessionStorage.getItem('username');
       sessionStorage.removeItem('username');
+      alert("Logging out " + username + "...");
       window.location.href = window.location.origin;
-      window.location.reload();
-      alert("Logging out "+username+"...")
     }
     else {
       alert("The user could not be logged out.")
@@ -33,7 +32,7 @@ let curr_user = sessionStorage.getItem('username')
 if ( curr_user !== null &&  curr_user !== "") {
     home_page_items = <div className="input_panel">
       <text className='username'>{sessionStorage.getItem("username")}</text>
-    <a className="nav_item" href="/djangoapp/logout" onClick={logout}>Logout</a>
+    <a className="nav_item" href="#" onClick={logout}>Logout</a>
   </div>
 }
     return (

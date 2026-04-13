@@ -1,3 +1,10 @@
 {
-    "python.pythonPath": "djangoenv\\Scripts\\python3.exe"
+    "python.pythonPath": "djangoenv\\Scripts\\python3.exe",
+    "python.formatting.provider": "black",
+    "chat.tools.terminal.autoApprove": {
+        "/^cd C:\\\\Users\\\\natha\\\\xrwvm-fullstack_developer_capstone\\\\server ; C:\\\\Users\\\\natha\\\\xrwvm-fullstack_developer_capstone\\\\djangoenv\\\\Scripts\\\\python\\.exe manage\\.py runserver$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }

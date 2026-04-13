@@ -14,7 +14,9 @@
   <script>
 
     const logout = async (e) => {
-      e.preventDefault();
+      if (e) {
+        e.preventDefault();
+      }
       let logout_url = window.location.origin + "/djangoapp/logout";
       const res = await fetch(logout_url, {
         method: "GET",
@@ -26,6 +28,7 @@
       } else {
         alert("The user could not be logged out.");
       }
+      return false;
     };
 
     let checkSession = () => {
@@ -34,7 +37,7 @@
       if (curr_user && curr_user !== "") {
         document.getElementById("loginlogout").innerHTML =
           '<span class="homepage_links">' + curr_user + '</span>' +
-          '<a class="homepage_links" onclick="logout()" href="/">Logout</a>'
+          '<a class="homepage_links" onclick="logout(event)" href="#">Logout</a>'
       } else {
         document.getElementById("loginlogout").innerHTML =
           '<a class="homepage_links" href="/login">Login</a>' +

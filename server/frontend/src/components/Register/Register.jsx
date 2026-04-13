@@ -4,6 +4,7 @@ import user_icon from "../assets/person.png"
 import email_icon from "../assets/email.png"
 import password_icon from "../assets/password.png"
 import close_icon from "../assets/close.png"
+
 const Register = () => {
     // State variables for form inputs
     const [userName, setUserName] = useState("");
