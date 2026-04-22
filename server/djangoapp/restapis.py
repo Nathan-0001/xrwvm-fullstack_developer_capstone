@@ -1,6 +1,7 @@
+"""Django REST Framework API views"""
 # Uncomment the imports below before you add the function code
-import requests
 import os
+import requests
 from dotenv import load_dotenv
 
 
@@ -14,6 +15,7 @@ sentiment_analyzer_url = os.getenv(
 
 # Add code for get requests to back end
 def get_request(endpoint, **kwargs):
+    """Do a GET request to the specified endpoint with optional parameters"""
     params = ""
     if kwargs:
         for key, value in kwargs.items():
@@ -21,19 +23,20 @@ def get_request(endpoint, **kwargs):
 
     request_url = backend_url + endpoint + "?" + params
 
-    print("GET from {} ".format(request_url))
+    print(f"GET from {request_url} ")
     try:
         # Call get method of requests library with URL and parameters
         response = requests.get(request_url)
         return response.json()
-    except:
+    except Exception as err:
+        print(f"Unexpected {err=}, {type(err)=}")
         # If any error occurs
         print("Network exception occurred")
 
 
-
 # Add code for retrieving sentiments
 def analyze_review_sentiments(text):
+    """Does sentiment analysis of the input text using the sentiment analyzer microservice"""
     request_url = sentiment_analyzer_url+"analyze/"+text
     try:
         # Call get method of requests library with URL and parameters
@@ -46,10 +49,12 @@ def analyze_review_sentiments(text):
 
 # Add code for posting review
 def post_review(data_dict):
+    """Does a POST request to the specified endpoint with a review in JSON format"""
     request_url = backend_url+"/insert_review"
     try:
-        response = requests.post(request_url,json=data_dict)
+        response = requests.post(request_url, json=data_dict)
         print(response.json())
         return response.json()
-    except:
+    except Exception as err:
+        print(f"Unexpected {err=}, {type(err)=}")
         print("Network exception occurred")
