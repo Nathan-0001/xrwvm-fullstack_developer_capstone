@@ -2,7 +2,8 @@
 
 For more details, please refer to the Django documentation:
 https://docs.djangoproject.com/en/3.2/topics/http/views/
-    """
+"""
+
 import json
 import logging
 from django.contrib.auth import logout
@@ -21,7 +22,7 @@ logger = logging.getLogger(__name__)
 # Create a `login_request` view to handle sign in request
 @csrf_exempt
 def login_user(request):
-    """ Get username and password from request.POST dictionary"""
+    """Get username and password from request.POST dictionary"""
     data = json.loads(request.body)
     username = data["userName"]
     password = data["password"]
@@ -47,7 +48,7 @@ def logout_user(request):
 # Create a `registration` view to handle sign up request
 @csrf_exempt
 def registration(request):
-
+    """Docstring goes here"""
     # Load JSON data from the request body
     data = json.loads(request.body)
     username = data["userName"]
@@ -60,9 +61,10 @@ def registration(request):
         # Check if user already exists
         User.objects.get(username=username)
         username_exist = True
-    except:
+    except Exception as e:
+        print(e)
         # If not, simply log this is a new user
-        logger.debug("{} is new user".format(username))
+        logger.debug(f"{username} is new user")
 
     # If it is a new user
     if not username_exist:
@@ -86,17 +88,18 @@ def registration(request):
 # Create a `get_cars` view to return a list of cars as JSON
 @csrf_exempt
 def get_cars():
+    """ Doctring goes here """
     count = CarMake.objects.filter().count()
     print(count)
-    if (count == 0):
+    if count == 0:
         initiate()
-    car_models = CarModel.objects.select_related('car_make')
+    car_models = CarModel.objects.select_related("car_make")
     cars = []
     for car_model in car_models:
-        cars.append({
-            "CarModel": car_model.name, "CarMake": car_model.car_make.name
-            })
+        cars.append({"CarModel": car_model.name,
+                     "CarMake": car_model.car_make.name})
     return JsonResponse({"CarModels": cars})
+
 
 # Update the `get_dealerships` view to render the index page with
 # a list of dealerships
@@ -104,33 +107,36 @@ def get_cars():
 
 
 def get_dealerships(state="All"):
-    if (state == "All"):
+    """Docstring goes here"""
+    if state == "All":
         endpoint = "/fetchDealers"
     else:
-        endpoint = "/fetchDealers/"+state
+        endpoint = "/fetchDealers/" + state
     dealerships = get_request(endpoint)
     return JsonResponse({"status": 200, "dealers": dealerships})
 
 
-# def get_dealer_reviews(request,dealer_id):
-def get_dealer_reviews(request, dealer_id):
+def get_dealer_reviews(dealer_id):
+    """Docstring goes here"""
     # if dealer id has been provided
-    if (dealer_id):
-        endpoint = "/fetchReviews/dealer/"+str(dealer_id)
+    if dealer_id:
+        endpoint = "/fetchReviews/dealer/" + str(dealer_id)
         reviews = get_request(endpoint)
         for review_detail in reviews:
-            response = analyze_review_sentiments(review_detail['review'])
+            response = analyze_review_sentiments(review_detail["review"])
             print(response)
-            review_detail['sentiment'] = response['sentiment']
+            review_detail["sentiment"] = response["sentiment"]
         return JsonResponse({"status": 200, "reviews": reviews})
     else:
         return JsonResponse({"status": 400, "message": "Bad Request"})
 
+    # Create a `get_dealer_details` view to render the dealer details
 
-# Create a `get_dealer_details` view to render the dealer details
+
 def get_dealer_details(dealer_id):
-    if (dealer_id):
-        endpoint = "/fetchDealer/"+str(dealer_id)
+    """Docstring goes here"""
+    if dealer_id:
+        endpoint = "/fetchDealer/" + str(dealer_id)
         dealership = get_request(endpoint)
         return JsonResponse({"status": 200, "dealer": dealership})
     else:
@@ -139,10 +145,12 @@ def get_dealer_details(dealer_id):
 
 # Create a `add_review` view to submit a review
 def add_review(request):
-    if (request.user.is_anonymous == False):
+    """Docstring goes here"""
+    if request.user.is_anonymous is False:
         try:
             return JsonResponse({"status": 200})
-        except:
+        except Exception as e:
+            print(e)
             return JsonResponse({
                 "status": 401, "message": "Error in posting review"
                 })
