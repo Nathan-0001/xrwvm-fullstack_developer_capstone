@@ -15,7 +15,8 @@ sentiment_analyzer_url = os.getenv(
 
 # Add code for get requests to back end
 def get_request(endpoint, **kwargs):
-    """Do a GET request to the specified endpoint with optional parameters"""
+    """Do a GET request to the
+    specified endpoint with optional parameters"""
     params = ""
     if kwargs:
         for key, value in kwargs.items():
@@ -36,7 +37,8 @@ def get_request(endpoint, **kwargs):
 
 # Add code for retrieving sentiments
 def analyze_review_sentiments(text):
-    """Does sentiment analysis of the input text using the sentiment analyzer microservice"""
+    """Does sentiment analysis of the input text
+    using the sentiment analyzer microservice"""
     request_url = sentiment_analyzer_url+"analyze/"+text
     try:
         # Call get method of requests library with URL and parameters
@@ -49,7 +51,8 @@ def analyze_review_sentiments(text):
 
 # Add code for posting review
 def post_review(data_dict):
-    """Does a POST request to the specified endpoint with a review in JSON format"""
+    """Does a POST request to the
+    specified endpoint with a review in JSON format"""
     request_url = backend_url+"/insert_review"
     try:
         response = requests.post(request_url, json=data_dict)
